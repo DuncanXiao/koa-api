@@ -15,7 +15,7 @@ module.exports = {
       root: [__dirname],
       extensions: ['.js', '.jsx'],
       alias: {
-        '@': __dirname
+        '@': `${__dirname}/src`
       }
     }]
   ]

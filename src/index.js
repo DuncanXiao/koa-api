@@ -1,26 +1,20 @@
-import path from 'path'
-import Koa from 'koa'
-import bodyParser from 'koa-bodyparser'
-import kstatic from 'koa-static'
-import cors from 'koa2-cors'
-import { mountSubApps } from './lib/koa-middlewares'
-import { getSubApps } from './helpers/get-sub-apps'
+require('dotenv').config()
+
+const Koa = require('koa')
+const bodyParser = require('koa-bodyparser')
+const { insertAppsMiddle } = require('@/lib/koa-middlewares')
+const { getSubApps, mountSubApps } = require('@/helpers/init-apps')
+const env = require('@/config/env').default
 
 const start = async () => {
-  const app = new Koa()
-  const staticPath = './static'
+  const server = new Koa()
+  const subApps = await getSubApps(server)
+  server.use(bodyParser())
+  server.use(insertAppsMiddle(subApps))
+  mountSubApps({ server, subApps })
 
-  const subApps = await getSubApps(app)
-  // app.use(mountAppsMiddle(Apps))
-
-  app.use(cors())
-  app.use(bodyParser())
-  app.use(kstatic(
-    path.join(__dirname, staticPath)
-  ))
-
-  app.listen(3000, () => {
-    console.log('[demo] request post is starting at port 3000')
+  server.listen(env.port, () => {
+    console.log(`[demo] request post is starting at port ${env.port}`)
   })
 }
 

@@ -9,12 +9,14 @@
     "start": "node_modules/.bin/nodemon --require @babel/register ./src/index.js"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
-    "recursive-readdir": "^2.2.2"
+    "lodash": "^4.17.15",
+    "require-dir": "^1.2.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.7.6",

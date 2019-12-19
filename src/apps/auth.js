@@ -1,15 +1,17 @@
 import Koa from 'koa'
 import Base from './base'
+import cors from 'koa2-cors'
 
 class Auth extends Base {
   constructor (options) {
     super(options)
-    this.app = options.app
-    this.koa = new Koa()
+    this.server = options.server
+    this.app = new Koa()
   }
 
-  mount () {
-    this.app.use(this.mount('/hello', this.koa))
+  mount = (server) => {
+    this.server.use(this.mount('/hello', this.app))
+    // this.app.use(cors())
   }
 }
 

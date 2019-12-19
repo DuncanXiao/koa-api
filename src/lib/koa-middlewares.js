@@ -1,4 +1,4 @@
-export const mountAppsMiddle = (subApps) => async (ctx, next) => {
+export const insertAppsMiddle = (subApps) => async (ctx, next) => {
   ctx.apps = subApps
   await next()
 }
