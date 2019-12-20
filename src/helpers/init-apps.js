@@ -14,6 +14,6 @@ export const getSubApps = async (server) => {
 
 export const mountSubApps = ({ server, subApps }) => {
   forEach(subApps, (a) => {
-    a.mount(server)
+    a.mountMiddleware(server)
   })
 }

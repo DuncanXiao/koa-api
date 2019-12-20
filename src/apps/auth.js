@@ -9,9 +9,16 @@ class Auth extends Base {
     this.app = new Koa()
   }
 
-  mount = (server) => {
+  mountMiddleware () {
     this.server.use(this.mount('/hello', this.app))
-    // this.app.use(cors())
+    this.app.use(cors())
+
+    // router.get('/a', (ctx, next) => {
+    //   ctx.body = 111
+    // });
+    // this.app
+    // .use(router.routes())
+    // .use(router.allowedMethods())
   }
 }
 
