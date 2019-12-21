@@ -7,18 +7,14 @@ class Auth extends Base {
     super(options)
     this.server = options.server
     this.app = new Koa()
+    this.router = this.getRouter('auth')
   }
 
   mountMiddleware () {
     this.server.use(this.mount('/hello', this.app))
     this.app.use(cors())
-
-    // router.get('/a', (ctx, next) => {
-    //   ctx.body = 111
-    // });
-    // this.app
-    // .use(router.routes())
-    // .use(router.allowedMethods())
+    this.app.use(this.router.routes())
+    this.app.use(this.router.allowedMethods())
   }
 }
 
